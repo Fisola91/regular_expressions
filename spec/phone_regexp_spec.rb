@@ -13,7 +13,7 @@ RSpec.describe "#french_phone_number?" do
   }
 
   FIXTURES.each do |phone_number, result|
-    it "should be true or false" do
+    it "should #{result ? "accept" : "reject"} #{phone_number}" do
       expect(french_phone_number?(phone_number)).to eq(result)
     end
   end
