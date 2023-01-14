@@ -4,11 +4,9 @@ def valid?(email)
 end
 
 def clean_database(emails)
-  valid_email = []
-  emails.map do |email|
-    valid_email << email if email.match?(EMAIL_PATTERN)
+  emails.select do |email|
+    email if email.match?(EMAIL_PATTERN)
   end
-  valid_email
 end
 
 def group_by_tld(emails)
