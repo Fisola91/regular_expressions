@@ -13,6 +13,7 @@ RSpec.describe "marketing campaign" do
     "edward@gmail.fr" => true
 
   }
+  let(:valid_email_array) {[]}
   context "when email is valid or invalid" do
     EMAILS.each do |email, result|
       status = result ? "valid" : "invalid"
@@ -22,8 +23,7 @@ RSpec.describe "marketing campaign" do
     end
   end
 
-  context "when array of valid emails" do
-    let(:valid_email_array) {[]}
+  context "when valid emails" do
     it "returns an array with valid emails only" do
       EMAILS.each do |email, result|
         valid_email_array << email if EMAILS[email] == true
@@ -40,5 +40,24 @@ RSpec.describe "marketing campaign" do
       end
       expect(group_by_tld(EMAILS.keys)).to eq(tld_grouped)
     end
+  end
+
+  context "when valid customer email" do
+    let(:user) {{}}
+    it "returns a Hash of username, domain and TLD from the email" do
+      EMAILS.each do |email, result|
+        valid_email_array << email if EMAILS[email] == true
+      end
+      valid_email_array.each do |email|
+        first_split = email.split("@")
+        second_split = first_split[1].split(".")
+        user["username"] = first_split[0]
+        user["domain"] = second_split[0]
+        user["tld"] = second_split[1]
+      end
+      p user
+      expect(compose_email(EMAILS.keys)).to eq(user)
+    end
+
   end
 end
