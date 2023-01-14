@@ -18,7 +18,7 @@ def group_by_tld(emails)
 end
 
 def compose_email(emails)
-  user {}
+  user = {}
   clean_database(emails).each do |email|
     first_split = email.split("@")
     second_split = first_split[1].split(".")
