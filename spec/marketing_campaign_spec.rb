@@ -5,7 +5,9 @@ RSpec.describe "marketing campaign" do
     "dimitri@lewagon" => false,
     "@lewagon" => false,
     "boris@lewagoncom" => false,
-    "seb@lewagon.com" => true
+    "seb@lewagon.com" => true,
+    "fisola@lewagon.com" => true,
+    "charles@lewagon.com" => true
   }
   context "when email is valid or invalid" do
     EMAIL.each do |email, result|
