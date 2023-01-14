@@ -1,7 +1,7 @@
 require "marketing_campaign"
 
 RSpec.describe "marketing campaign" do
-  EMAIL = {
+  EMAILS = {
     "dimitri@lewagon" => false,
     "@lewagon" => false,
     "boris@lewagoncom" => false,
@@ -10,7 +10,7 @@ RSpec.describe "marketing campaign" do
     "charles@lewagon.com" => true
   }
   context "when email is valid or invalid" do
-    EMAIL.each do |email, result|
+    EMAILS.each do |email, result|
       outcome = result ? "valid" : "invalid"
       it "returns #{result ? true : false } for #{outcome} email" do
         expect(valid?(email)).to eq(result)
@@ -19,13 +19,12 @@ RSpec.describe "marketing campaign" do
   end
 
     context "when array of valid emails" do
+      let(:valid_email_array) {[]}
       it "returns an array with valid emails only" do
-        let(:valid_email_array) {[]}
-        EMAIL.each do |email, result|
-          valid_email_array << email if EMAIL[email] == true
+        EMAILS.each do |email, result|
+          valid_email_array << email if EMAILS[email] == true
         end
-        expect(clean_database(EMAIL.keys)).to match_array(valid_email_array)
+        expect(clean_database(EMAILS.keys)).to match_array(valid_email_array)
       end
-
     end
 end
