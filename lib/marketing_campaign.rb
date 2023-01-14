@@ -6,7 +6,7 @@ end
 def clean_database(emails)
   valid_email = []
   emails.map do |email|
-    email.match?(EMAIL_PATTERN) ? valid_email << email : nil
+    valid_email << email if email.match?(EMAIL_PATTERN)
   end
   valid_email
 end

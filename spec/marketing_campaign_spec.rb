@@ -18,13 +18,13 @@ RSpec.describe "marketing campaign" do
     end
   end
 
-    context "when array of valid emails" do
-      let(:valid_email_array) {[]}
-      it "returns an array with valid emails only" do
-        EMAILS.each do |email, result|
-          valid_email_array << email if EMAILS[email] == true
-        end
-        expect(clean_database(EMAILS.keys)).to match_array(valid_email_array)
+  context "when array of valid emails" do
+    let(:valid_email_array) {[]}
+    it "returns an array with valid emails only" do
+      EMAILS.each do |email, result|
+        valid_email_array << email if EMAILS[email] == true
       end
+      expect(clean_database(EMAILS.keys)).to match_array(valid_email_array)
     end
+  end
 end
