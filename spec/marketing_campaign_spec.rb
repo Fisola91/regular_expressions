@@ -35,7 +35,7 @@ RSpec.describe MarketingCampaign do
       signature: "Das Team"
     }
   }
-  let(:subject) { MarketingCampaign.new(EMAILS.keys)}
+  let(:subject) { MarketingCampaign.new(EMAILS.keys) }
 
   context "when email is valid or invalid" do
     EMAILS.each do |email, result|
