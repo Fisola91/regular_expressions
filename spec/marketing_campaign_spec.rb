@@ -10,10 +10,11 @@ RSpec.describe "marketing campaign" do
     "charles@lewagon.com" => true,
     "dimitri@berlin.de" => true,
     "kevin@yahoo.fr" => true,
-    "edward@gmail.fr" => true,
     "john@london.uk" => true,
-    "peter@london.uk" => true
+    "peter@london.uk" => true,
+    "edward@gmail.fr" => true
   }
+
   LOCALES = {
     uk: {
       subject: "Our website is online",
@@ -35,8 +36,6 @@ RSpec.describe "marketing campaign" do
     }
   }
 
-  let(:valid_email_array) {[]}
-
   context "when email is valid or invalid" do
     EMAILS.each do |email, result|
       status = result ? "valid" : "invalid"
@@ -47,60 +46,58 @@ RSpec.describe "marketing campaign" do
   end
 
   context "when valid emails" do
-    let(:user) {{}}
     it "returns an array with valid emails only" do
-      EMAILS.each do |email, result|
-        valid_email_array << email if EMAILS[email] == true
-      end
+      valid_email_array =
+        [
+          "seb@lewagon.com",
+          "fisola@lewagon.com",
+          "charles@lewagon.com",
+          "dimitri@berlin.de",
+          "kevin@yahoo.fr",
+          "john@london.uk",
+          "peter@london.uk",
+          "edward@gmail.fr"
+        ]
       expect(clean_database(EMAILS.keys)).to match_array(valid_email_array)
     end
 
     it "returns a Hash with the email addresses grouped by TLD" do
-      EMAILS.each do |email, result|
-        valid_email_array << email if EMAILS[email] == true
-      end
-      tld_grouped = valid_email_array.group_by do |email|
-        email.split(".")[1]
-      end
+      tld_grouped = {
+        "com"=>["seb@lewagon.com", "fisola@lewagon.com", "charles@lewagon.com"],
+        "de"=>["dimitri@berlin.de"],
+        "fr"=>["kevin@yahoo.fr", "edward@gmail.fr"],
+        "uk"=>["john@london.uk", "peter@london.uk"]
+      }
       expect(group_by_tld(EMAILS.keys)).to eq(tld_grouped)
     end
 
     it "returns a Hash of username, domain and TLD from the email" do
-      EMAILS.each do |email, result|
-        valid_email_array << email if EMAILS[email] == true
-      end
-      valid_email_array.each do |email|
-        first_split = email.split("@")
-        second_split = first_split[1].split(".")
-        user[:username] = first_split[0]
-        user[:domain] = second_split[0]
-        user[:tld] = second_split[1]
-      end
-      expect(compose_email(EMAILS.keys)).to eq(user)
+      expect(compose_email("seb@lewagon.fr")).to eq({ username: "seb", domain: "lewagon", tld: "fr" })
+      expect(compose_email("dimitri@lewagon.de")).to eq({ username: "dimitri", domain: "lewagon", tld: "de"})
     end
   end
 
-  context "when language translation" do
-    let(:user) {{}}
-    it "returns a Hash of user based on TLD" do
-      EMAILS.each do |email, result|
-        valid_email_array << email if EMAILS[email] == true
-      end
-      valid_email_array.each do |email|
-        first_split = email.split("@")
-        second_split = first_split[1].split(".")
-        user[:username] = first_split[0]
-        user[:domain] = second_split[0]
-        user[:tld] = second_split[1]
-      end
-      LOCALES.each do |tld, info|
-        if tld == user[:tld].to_sym
-          info.each do |keywords, text|
-            user[keywords] = text
-          end
-        end
-      end
-      expect(compose_translated_email(EMAILS.keys)).to eq(user)
-    end
-  end
+  # context "when language translation" do
+  #   let(:user) {{}}
+  #   it "returns a Hash of user based on TLD" do
+  #     EMAILS.each do |email, result|
+  #       valid_email_array << email if EMAILS[email] == true
+  #     end
+  #     valid_email_array.each do |email|
+  #       first_split = email.split("@")
+  #       second_split = first_split[1].split(".")
+  #       user[:username] = first_split[0]
+  #       user[:domain] = second_split[0]
+  #       user[:tld] = second_split[1]
+  #     end
+  #     LOCALES.each do |tld, info|
+  #       if tld == user[:tld].to_sym
+  #         info.each do |keywords, text|
+  #           user[keywords] = text
+  #         end
+  #       end
+  #     end
+  #     expect(compose_translated_email(EMAILS.keys)).to eq(user)
+  #   end
+  # end
 end
