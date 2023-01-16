@@ -93,14 +93,14 @@ RSpec.describe "marketing campaign" do
         user[:domain] = second_split[0]
         user[:tld] = second_split[1]
       end
-      LOCALES.each do |tld, index|
+      LOCALES.each do |tld, info|
         if tld == user[:tld].to_sym
-          index.each do |keywords, text|
+          info.each do |keywords, text|
             user[keywords] = text
           end
         end
       end
-      expect(compose_translated_email).to eq(user)
+      expect(compose_translated_email(EMAILS.keys)).to eq(user)
     end
   end
 end

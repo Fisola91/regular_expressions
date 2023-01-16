@@ -23,6 +23,18 @@ def compose_email(emails)
   user
 end
 
+def compose_translated_email(emails)
+  compose_email(emails)
+  LOCALES.each do |tld, info|
+    if tld == user[:tld].to_sym
+      info.each do |keywords, text|
+        user[keywords] = text
+      end
+    end
+  end
+  user
+end
+
 private
 
 def user_info(user, email)
