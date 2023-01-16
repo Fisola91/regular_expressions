@@ -11,6 +11,10 @@ class DoubleRainbow
     sentence.match(/(\w+)(!)/)[1]
   end
 
+  def four_letter_word
+    sentence.match(/\b(b\w{3}),/)[1]
+  end
+
 
 
   private

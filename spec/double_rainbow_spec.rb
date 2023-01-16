@@ -14,4 +14,8 @@ RSpec.describe DoubleRainbow do
   it "returns first word located before an exclamation mark" do
     expect(secret_message.word_before_exclamation_mark).to eq("indigo")
   end
+
+  it "returns the first four letter word starting with 'b', followed with a comma" do
+    expect(secret_message.four_letter_word).to eq("blue")
+  end
 end
