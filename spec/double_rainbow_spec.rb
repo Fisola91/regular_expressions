@@ -30,4 +30,8 @@ RSpec.describe DoubleRainbow do
     expect(secret_message.six_letter_word).to eq("orange")
   end
 
+  it "returns all the capital letters as a string" do
+    expect(secret_message.all_capital_letters).to eq("RED")
+  end
+
 end

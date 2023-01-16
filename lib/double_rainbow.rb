@@ -1,4 +1,5 @@
 class DoubleRainbow
+
   def initialize(sentence)
     @sentence = sentence
   end
@@ -27,7 +28,9 @@ class DoubleRainbow
     sentence.match(/[a-r]{6}/)[0]
   end
 
-
+  def all_capital_letters
+    sentence.scan(/[A-Z]/).join
+  end
 
   private
   attr_reader :sentence
