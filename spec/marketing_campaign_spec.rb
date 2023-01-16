@@ -73,14 +73,13 @@ RSpec.describe MarketingCampaign do
     end
 
     it "returns a Hash of username, domain and TLD from the email" do
-      expect(compose_email("seb@lewagon.fr")).to eq({ username: "seb", domain: "lewagon", tld: "fr" })
-      expect(compose_email("dimitri@lewagon.de")).to eq({ username: "dimitri", domain: "lewagon", tld: "de"})
+      expect(subject.compose_email("seb@lewagon.fr")).to eq({ username: "seb", domain: "lewagon", tld: "fr" })
+      expect(subject.compose_email("dimitri@lewagon.de")).to eq({ username: "dimitri", domain: "lewagon", tld: "de"})
     end
   end
 
   context "when language translation" do
     it "should return a Hash with the message informations in french for a `.fr` mail" do
-      email = compose_translated_email("edward@gmail.fr")
       expected = {
         username: "edward",
         domain: "gmail",
@@ -90,11 +89,10 @@ RSpec.describe MarketingCampaign do
         closing: "A bientot",
         signature: "L'équipe"
       }
-      expect(email).to eq(expected)
+      expect(subject.compose_translated_email("edward@gmail.fr")).to eq(expected)
     end
 
     it "should return a Hash with the message informations in english for a `.uk` mail" do
-      email = compose_translated_email("john@london.uk")
       expected = {
         username: "john",
         domain: "london",
@@ -104,11 +102,10 @@ RSpec.describe MarketingCampaign do
         closing: "See you soon",
         signature: "The Team"
       }
-      expect(email).to eq(expected)
+      expect(subject.compose_translated_email("john@london.uk")).to eq(expected)
     end
 
     it "should return a Hash with the message informations in english for a `.de` mail" do
-      email = compose_translated_email("dimitri@berlin.de")
       expected = {
         username: "dimitri",
         domain: "berlin",
@@ -118,7 +115,7 @@ RSpec.describe MarketingCampaign do
         closing: "Bis bald",
         signature: "Das Team"
       }
-      expect(email).to eq(expected)
+      expect(subject.compose_translated_email("dimitri@berlin.de")).to eq(expected)
     end
   end
 end
