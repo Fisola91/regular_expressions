@@ -10,8 +10,29 @@ RSpec.describe "marketing campaign" do
     "charles@lewagon.com" => true,
     "dimitri@berlin.de" => true,
     "kevin@yahoo.fr" => true,
-    "edward@gmail.fr" => true
-
+    "edward@gmail.fr" => true,
+    "john@london.uk" => true,
+    "peter@london.uk" => true
+  }
+  LOCALES = {
+    uk: {
+      subject: "Our website is online",
+      body: "Come and visit us!",
+      closing: "See you soon",
+      signature: "The Team"
+    },
+    fr: {
+      subject: "Notre site est en ligne",
+      body: "Venez nous rendre visite !",
+      closing: "A bientot",
+      signature: "L'équipe"
+    },
+    de: {
+      subject: "Unsere Website ist jetzt online",
+      body: "Komm und besuche uns!",
+      closing: "Bis bald",
+      signature: "Das Team"
+    }
   }
 
   let(:valid_email_array) {[]}
@@ -51,11 +72,35 @@ RSpec.describe "marketing campaign" do
       valid_email_array.each do |email|
         first_split = email.split("@")
         second_split = first_split[1].split(".")
-        user["username"] = first_split[0]
-        user["domain"] = second_split[0]
-        user["tld"] = second_split[1]
+        user[:username] = first_split[0]
+        user[:domain] = second_split[0]
+        user[:tld] = second_split[1]
       end
       expect(compose_email(EMAILS.keys)).to eq(user)
+    end
+  end
+
+  context "when language translation" do
+    let(:user) {{}}
+    it "returns a Hash of user based on TLD" do
+      EMAILS.each do |email, result|
+        valid_email_array << email if EMAILS[email] == true
+      end
+      valid_email_array.each do |email|
+        first_split = email.split("@")
+        second_split = first_split[1].split(".")
+        user[:username] = first_split[0]
+        user[:domain] = second_split[0]
+        user[:tld] = second_split[1]
+      end
+      LOCALES.each do |tld, index|
+        if tld == user[:tld].to_sym
+          index.each do |keywords, text|
+            user[keywords] = text
+          end
+        end
+      end
+      expect(compose_translated_email).to eq(user)
     end
   end
 end

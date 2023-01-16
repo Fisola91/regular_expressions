@@ -23,11 +23,13 @@ def compose_email(emails)
   user
 end
 
+private
+
 def user_info(user, email)
   arrays = email.split("@").map do |pair|
     pair.split(".")
   end
-  user["username"] = arrays[0][0]
-  user["domain"] = arrays[1][0]
-  user["tld"] = arrays[1][1]
+  user[:username] = arrays[0][0]
+  user[:domain] = arrays[1][0]
+  user[:tld] = arrays[1][1]
 end
