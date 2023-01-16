@@ -1,6 +1,6 @@
 require "marketing_campaign"
 
-RSpec.describe "marketing campaign" do
+RSpec.describe MarketingCampaign do
   EMAILS = {
     "dimitri@lewagon" => false,
     "@lewagon" => false,
@@ -35,12 +35,13 @@ RSpec.describe "marketing campaign" do
       signature: "Das Team"
     }
   }
+  let(:subject) { MarketingCampaign.new(EMAILS.keys)}
 
   context "when email is valid or invalid" do
     EMAILS.each do |email, result|
       status = result ? "valid" : "invalid"
       it "returns #{result ? true : false } for #{status} email" do
-        expect(valid?(email)).to eq(result)
+        expect(subject.valid?(email)).to eq(result)
       end
     end
   end
@@ -58,7 +59,7 @@ RSpec.describe "marketing campaign" do
           "peter@london.uk",
           "edward@gmail.fr"
         ]
-      expect(clean_database(EMAILS.keys)).to match_array(valid_email_array)
+      expect(subject.clean_database).to match_array(valid_email_array)
     end
 
     it "returns a Hash with the email addresses grouped by TLD" do
@@ -68,7 +69,7 @@ RSpec.describe "marketing campaign" do
         "fr"=>["kevin@yahoo.fr", "edward@gmail.fr"],
         "uk"=>["john@london.uk", "peter@london.uk"]
       }
-      expect(group_by_tld(EMAILS.keys)).to eq(tld_grouped)
+      expect(subject.group_by_tld).to eq(tld_grouped)
     end
 
     it "returns a Hash of username, domain and TLD from the email" do
