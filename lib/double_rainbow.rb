@@ -13,7 +13,7 @@ class DoubleRainbow
   end
 
   def four_letter_word
-    sentence.match(/\b(b\w{3}),/)[1]
+    sentence.match(/(b\w{3}),/)[1]
   end
 
   def last_five_letters
@@ -21,7 +21,7 @@ class DoubleRainbow
   end
 
   def word_contains_ll
-    sentence.match(/\w+(ll)\w+/)[0]
+    sentence.match(/\w+ll\w+/)[0]
   end
 
   def six_letter_word
