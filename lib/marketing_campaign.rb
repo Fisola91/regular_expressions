@@ -1,3 +1,6 @@
+# class marketing_campaign
+
+# end
 EMAIL_PATTERN = /\w+@\w+\.\w{2,3}/
 def valid?(email)
   email.match?(EMAIL_PATTERN)
@@ -36,10 +39,6 @@ def compose_translated_email(email)
 end
 
 def translate(keyword, language)
-  if LOCALES[language.to_sym].nil?
-    translation = LOCALES[:uk]
-  else
-    translation = LOCALES[language.to_sym]
-  end
+  translation = LOCALES[language.to_sym]
   return translation[keyword]
 end
