@@ -19,6 +19,13 @@ class DoubleRainbow
     sentence.match(/\w+$/)[0]
   end
 
+  # def word_contains_ll
+  #   sentence.match(/([a-r]{6/)
+  # end
+  def six_letter_word
+    sentence.match(/[a-r]{6}/)[0]
+  end
+
 
 
   private

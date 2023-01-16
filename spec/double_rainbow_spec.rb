@@ -22,4 +22,12 @@ RSpec.describe DoubleRainbow do
   it "returns the last five letters of the sentence" do
     expect(secret_message.last_five_letters).to eq("green")
   end
+
+  # it "returns the first word containing two consecutive 'l'" do
+  #   expect(secret_message.word_contains_ll). to eq("yellow")
+  # end
+  it "returns the first six-letter word, composed of letters from 'a' to 'r'" do
+    expect(secret_message.six_letter_word).to eq("orange")
+  end
+
 end
