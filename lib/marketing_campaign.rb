@@ -22,14 +22,24 @@ def compose_email(email)
   }
 end
 
-def compose_translated_email(emails)
-  compose_email(emails)
-  LOCALES.each do |tld, info|
-    if tld == user[:tld]
-      info.each do |keywords, text|
-        user[keywords] = text
-      end
-    end
+def compose_translated_email(email)
+  match_data = email.match(/^(?<name>\w+)@(?<domain>\w+).(?<tld>\w+)$/)
+  return {
+    username: match_data[:name],
+    domain: match_data[:domain],
+    tld: match_data[:tld],
+    subject: translate(:subject, match_data[:tld]),
+    body: translate(:body, match_data[:tld]),
+    closing: translate(:closing, match_data[:tld]),
+    signature: translate(:signature, match_data[:tld])
+  }
+end
+
+def translate(keyword, language)
+  if LOCALES[language.to_sym].nil?
+    translation = LOCALES[:uk]
+  else
+    translation = LOCALES[language.to_sym]
   end
-  user
+  return translation[keyword]
 end
