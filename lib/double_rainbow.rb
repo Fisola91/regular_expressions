@@ -15,6 +15,10 @@ class DoubleRainbow
     sentence.match(/\b(b\w{3}),/)[1]
   end
 
+  def last_five_letters
+    sentence.match(/\w+$/)[0]
+  end
+
 
 
   private
