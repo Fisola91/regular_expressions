@@ -79,7 +79,7 @@ RSpec.describe MarketingCampaign do
   end
 
   context "when language translation" do
-    it "should return a Hash with the message informations in french for a `.fr` mail" do
+    it "returns a Hash with the message informations in french for a `.fr` mail" do
       expected = {
         username: "edward",
         domain: "gmail",
@@ -92,7 +92,7 @@ RSpec.describe MarketingCampaign do
       expect(subject.compose_translated_email("edward@gmail.fr")).to eq(expected)
     end
 
-    it "should return a Hash with the message informations in english for a `.uk` mail" do
+    it "returns a Hash with the message informations in english for a `.uk` mail" do
       expected = {
         username: "john",
         domain: "london",
@@ -105,7 +105,7 @@ RSpec.describe MarketingCampaign do
       expect(subject.compose_translated_email("john@london.uk")).to eq(expected)
     end
 
-    it "should return a Hash with the message informations in english for a `.de` mail" do
+    it "returns a Hash with the message informations in english for a `.de` mail" do
       expected = {
         username: "dimitri",
         domain: "berlin",

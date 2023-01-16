@@ -41,10 +41,11 @@ class MarketingCampaign
   end
 
   private
-  attr_reader :emails
 
-  def translate(keyword, language)
-    translation = LOCALES[language.to_sym]
-    return translation[keyword]
-  end
+    attr_reader :emails
+
+    def translate(keyword, language)
+      translation = LOCALES[language.to_sym]
+      return translation[keyword]
+    end
 end
