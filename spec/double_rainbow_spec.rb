@@ -18,4 +18,8 @@ RSpec.describe DoubleRainbow do
   it "returns the first four letter word starting with 'b', followed with a comma" do
     expect(secret_message.four_letter_word).to eq("blue")
   end
+
+  it "returns the last five letters of the sentence" do
+    expect(secret_message.last_five_letters).to eq("green")
+  end
 end
