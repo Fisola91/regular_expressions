@@ -11,7 +11,7 @@ RSpec.describe DoubleRainbow do
     expect(secret_message.word_contains_at_least_two_p).to eq("purple")
   end
 
-  # it "returns first word located befpre an exclamation mark" do
-  #   expect(secretword_before_exclamation_mark).to eq("indigo")
-  # end
+  it "returns first word located before an exclamation mark" do
+    expect(secret_message.word_before_exclamation_mark).to eq("indigo")
+  end
 end

@@ -7,6 +7,10 @@ class DoubleRainbow
     sentence.match(/\bp\w+/)[0]
   end
 
+  def word_before_exclamation_mark
+    sentence.match(/(\w+)(!)/)[1]
+  end
+
 
 
   private
