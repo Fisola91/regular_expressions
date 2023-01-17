@@ -9,7 +9,7 @@ class DoubleRainbow
   end
 
   def word_before_exclamation_mark
-    sentence.match(/(\w+)(!)/)[1]
+    sentence.match(/(\w+)!/)[1]
   end
 
   def four_letter_word
